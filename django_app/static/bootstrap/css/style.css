@@ -2,8 +2,8 @@
     padding-bottom:15px;
 }
 
-.post-list{
+.post-list > .post{
     padding-top: 10px;
     padding-bottom: 10px;
-    border-bottom: 1px solid #999;
+    border-bottom: 1px solid black;
 }

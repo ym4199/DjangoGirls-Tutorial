@@ -1,13 +1,17 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.utils import timezone
+from django.contrib.auth import get_user_model
 # Create your views here.
+
+User=get_user_model()
 from .models import Post
 
 def post_list(request):
     # post 변수에 orm을 이용해서 전체 post의 리스트(쿼리셋)를 대입
     # posts = Post.objects.all()
-    posts =Post.objects.filter(published_date__lte=timezone.now())
+    posts =Post.objects.order_by('-created_date')
+
     print(posts)
 
     # posts published_date가 timezone.now()보다 작음 값을 가질때만
@@ -35,7 +39,14 @@ def post_create(request):
         }
         return render(request, 'blog/post_create.html',context)
     elif request.method == 'POST':
-        date = request.POST
-        print(date)
-        # post = Post.objects.create()
-        return HttpResponse('post_create POST request')
+        data = request.POST
+        title = data['title']
+        text = data['text']
+        user = User.objects.first()
+        post = Post.objects.create(
+            title = title,
+            text = text,
+            author = user,
+        )
+        # return HttpResponse('post_create POST request')
+        return redirect('post_detail',pk=post.pk)
