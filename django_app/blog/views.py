@@ -4,6 +4,8 @@ from django.utils import timezone
 from django.contrib.auth import get_user_model
 # Create your views here.
 
+from .forms import PostCreateForm
+
 User=get_user_model()
 from .models import Post
 
@@ -34,19 +36,44 @@ def post_detail(request, pk):
 
 def post_create(request):
     if request.method == 'GET':
+        form =PostCreateForm()
         context={
-
+            'form':form,
         }
         return render(request, 'blog/post_create.html',context)
     elif request.method == 'POST':
+        form = PostCreateForm(request.POST)
+        if form.is_valid():
+            # data = request.POST
+            title = form.cleaned_data['title']
+            text = form.cleaned_data['text']
+            user = User.objects.first()
+            post = Post.objects.create(
+                title = title,
+                text = text,
+                author = user,
+            )
+            return redirect('post_detail',pk=post.pk)
+        else:
+            context = {
+                'form':form,
+            }
+        # return HttpResponse('post_create POST request')
+        return redirect('post_detail')
+
+
+def post_modify(request, pk):
+    post=Post.objects.get(pk=pk)
+    if request.method == 'POST':
         data = request.POST
         title = data['title']
         text = data['text']
-        user = User.objects.first()
-        post = Post.objects.create(
-            title = title,
-            text = text,
-            author = user,
-        )
-        # return HttpResponse('post_create POST request')
-        return redirect('post_detail',pk=post.pk)
+        post.title = title
+        post.text = text
+        post.save()
+        return redirect('post_detail', pk = pk)
+    elif request.method == 'GET':
+        context = {
+            'post':post,
+        }
+    return render(request, 'blog/post_modify.html',context)
