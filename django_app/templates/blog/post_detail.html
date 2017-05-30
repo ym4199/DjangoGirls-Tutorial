@@ -18,19 +18,19 @@
         </div>
         <!--&lt;!&ndash;<div>{{posts}}</div>&ndash;&gt;-->
 
-        {% for post in posts %}
-        <div class="post-list">
-            <h4><a href="#">{{post.title}}</a></h4>
-            <p CLASS="text-right"><small>published: {{post.published_date}}</small></p>
-            <p>{{post.text|truncatechars:120}}</p>
-        </div>
-        {% endfor %}
+        <!--{% for post in posts %}-->
+        <!--<div class="post-list">-->
+            <!--<h4><a href="#">{{post.title}}</a></h4>-->
+            <!--<p CLASS="text-right"><small>published: {{post.published_date}}</small></p>-->
+            <!--<p>{{post.text|truncatechars:120}}</p>-->
+        <!--</div>-->
+        <!--{% endfor %}-->
 
         <div class="post-list">
             <div class="post">
-                <p>published: 05.29.2017, 12:14</p>
-                <h2><a href="#">{{post.title}}</a></h2>
-                <p>{{post.text}}</p>
+                <h4><a href="#">{{post.title}}</a></h4>
+                <p class="text-right">{{post.publish_date}}</p>
+                <p>{{post.text|truncatechars:120}}</p>
             </div>
         </div>
     </div>

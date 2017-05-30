@@ -19,3 +19,10 @@ def post_list(request):
 
     return render(request, 'blog/post_list.html',context=context)
 
+def post_detail(request, pk):
+    print('post_detail pk:',pk)
+    # context 에 post라는 키값으로 pk 또는 id 값이 매개변수로 주어진 pk변수와 같은 post객체를 전달
+    context={
+        'post': Post.objects.get(pk=pk)
+    }
+    return render(request,'blog/post_detail.html',context)
