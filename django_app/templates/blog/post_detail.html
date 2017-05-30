@@ -1,38 +1,11 @@
-{% load staticfiles %}
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport"
-              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Django Girls blog</title>
-        <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css'%}">
-        <link rel="stylesheet" href="{% static 'bootstrap/css/style.css'%}">
-    </head>
-    <body>
-    <div class="container">
-        <div class="header">
-            <h1><a href="#">Django Girls Blog</a></h1>
-            <h4>{{title}}</h4>
-        </div>
-        <!--&lt;!&ndash;<div>{{posts}}</div>&ndash;&gt;-->
+{% extends 'blog/base.html' %}
 
-        <!--{% for post in posts %}-->
-        <!--<div class="post-list">-->
-            <!--<h4><a href="#">{{post.title}}</a></h4>-->
-            <!--<p CLASS="text-right"><small>published: {{post.published_date}}</small></p>-->
-            <!--<p>{{post.text|truncatechars:120}}</p>-->
-        <!--</div>-->
-        <!--{% endfor %}-->
-
-        <div class="post-list">
-            <div class="post">
-                <h4><a href="#">{{post.title}}</a></h4>
-                <p class="text-right">{{post.publish_date}}</p>
-                <p>{{post.text|truncatechars:120}}</p>
-            </div>
-        </div>
+{% block content %}
+<div class="post-list">
+    <div class="post">
+        <h4><a href="#">{{post.title}}</a></h4>
+        <p class="text-right">{{post.publish_date}}</p>
+        <p>{{post.text}}</p>
     </div>
-    </body>
-</html>
+</div>
+{% endblock %}
