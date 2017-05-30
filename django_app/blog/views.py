@@ -26,3 +26,16 @@ def post_detail(request, pk):
         'post': Post.objects.get(pk=pk)
     }
     return render(request,'blog/post_detail.html',context)
+
+
+def post_create(request):
+    if request.method == 'GET':
+        context={
+
+        }
+        return render(request, 'blog/post_create.html',context)
+    elif request.method == 'POST':
+        date = request.POST
+        print(date)
+        # post = Post.objects.create()
+        return HttpResponse('post_create POST request')
