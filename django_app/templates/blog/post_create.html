@@ -1,21 +1,17 @@
 {% extends 'blog/base.html' %}
 
-{% block content %}
-<form action="" method="POST">
-    {% csrf_token %}
-    <!--<input name="title" type="text">-->
-    <!--<textarea name="text" id="" cols="30" rows="10"></textarea>-->
 
+{% block content %}
+<form action="/post/create/" method="POST">
+    <a href="{% url 'post_list' %}" class="btn btn-primary pull-right">뒤로가기</a>
+    {% csrf_token %}
     {% for field in form %}
     <div class="form-group">
         {{field.label_tag}}
         {{field}}
-    </div>
-
+        </div>
     {% endfor %}
-    <button type="submit" class="btn btn-primary">작성</button>
-
+    <button type="submit">작성</button>
 </form>
-
 
 {% endblock %}

@@ -1,11 +1,13 @@
 {% extends 'blog/base.html' %}
-
 {% block content %}
 <div class="post-list">
     <div class="post">
-        <h4><a href="#">{{post.title}}</a></h4>
-        <p class="text-right">{{post.publish_date}}</p>
-        <p>{{post.text|linebreaksbr}}</p>
+        <h3><a href="#">{{post.title}}</a></h3>
+        <p class="text-right"><small>published: {{post.published_date}}</small></p>
+        <p>{{post.text}}</p>
     </div>
+    <a href="{% url 'post_delete' pk=post.pk %}"><button class="btn btn-primary pull-left">삭제하기</button></a>
+    <a href="{% url 'post_modify' pk=post.pk %}"><button class="btn btn-primary pull-right">수정하기</button></a>
 </div>
+
 {% endblock %}

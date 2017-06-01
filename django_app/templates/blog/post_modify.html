@@ -1,13 +1,11 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-<form action="" method="POST">
+<form action="/post/create/" method="POST">
     {% csrf_token %}
-    <input type="text" name="title" value="{{post.title}}">
+    <input type="text" name="title">
     <textarea name="text" id="" cols="30" rows="10"></textarea>
-    <button type="submit" class="btn btn-primary">수정</button>
-
+    <button type="submit">수정</button>
 </form>
-
 
 {% endblock %}
